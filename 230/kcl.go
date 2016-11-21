@@ -23,6 +23,7 @@ func kthSmallest(root *TreeNode, k int) int {
     return kthSmallest(root.Right, k-1-cnt)
 }
 
+// TODO: cache middle values
 func count(root *TreeNode) int{
 	if root == nil{
 		return 0
