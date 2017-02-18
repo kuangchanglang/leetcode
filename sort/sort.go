@@ -92,6 +92,36 @@ func merge(a, b []int)[]int{
 	return res
 }
 
+func heapSort(s []int)[]int{
+	buildHeap(s)
+	for i:=len(s)-1;i>0;i--{
+		s[0], s[i] = s[i], s[0]
+		heapify(s[0:i], 0)
+	}
+	return s
+}
+
+func heapify(s []int, pos int){
+	l, r := pos*2+1, pos*2+2
+	if l>=len(s){
+		return
+	}
+	c := l
+	if r < len(s) && s[r]>s[l]{
+		c = r
+	}
+
+	if(s[c] > s[pos]){
+		s[pos], s[c] = s[c], s[pos]
+		heapify(s, c)
+	}
+}
+
+func buildHeap(s []int){
+	for i:= len(s)-1;i>=0;i--{
+		heapify(s, i)
+	}
+}
 
 func main() {
 	fmt.Println(bubbleSort([]int{8, 5, 9, 1, 2, 6, 3, 4, 7}))
@@ -99,5 +129,6 @@ func main() {
 	fmt.Println(selectSort([]int{8, 5, 9, 1, 2, 6, 3, 4, 7}))
 	fmt.Println(mergeSort([]int{8, 5, 9, 1, 2, 6, 3, 4, 7}))
 	fmt.Println(quickSort([]int{8, 5, 9, 1, 2, 6, 3, 4, 7}))
+	fmt.Println(heapSort([]int{8, 5, 9, 1, 2, 6, 3, 4, 7}))
 	fmt.Println("vim-go")
 }
